@@ -1,0 +1,35 @@
+# Copy to ~/.claude-phone/config.toml
+
+phone = "keyboard"                     # "keyboard" (simulator) or "serial" (the Nano)
+# serial_port = "/dev/cu.wchusbserial110"   # default: auto-detect
+
+# Audio devices, matched by name substring.
+audio_input = "USB PnP Sound Device"   # for testing without a handset: "MacBook Pro Microphone"
+audio_output = "USB PnP Sound Device"  # earpiece cues; for testing: "MacBook Pro Speakers"
+
+runner = "superset"                    # "superset" or "iterm"
+ring_scope = "phone"                   # "phone" = only sessions started by the phone, "all" = every Claude session
+http_port = 47333
+min_seconds = 1.0                      # shorter calls count as accidental lifts
+silence_dbfs = -50.0                   # quieter recordings count as silence (card noise floor is about -57)
+
+[stt]
+model = "mlx-community/whisper-large-v3-turbo"
+# language = "en"                      # default: auto-detect
+# initial_prompt = "Claude, Superset, pull request, pytest"   # vocabulary hint
+
+# Targets: no key pressed = "default"; digits pressed before speaking pick another.
+# Superset workspace ids: `superset ws list --local`
+[targets.default]
+workspace = "00000000-0000-0000-0000-000000000000"
+cwd = "~/code/my-project"              # used by the iTerm runner
+
+# [targets.1]
+# workspace = "..."
+# cwd = "~/code/other-project"
+
+# Ring cadences in ms: on, off, on, ...
+[ring_patterns]
+done = [350]
+attention = [300, 200, 300]
+error = [150, 100, 150, 100, 150]

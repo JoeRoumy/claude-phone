@@ -1,0 +1,24 @@
+[project]
+name = "claude-phone"
+version = "0.1.0"
+description = "Mac side of the Claude Phone: handset audio, speech-to-text, Claude sessions and the ringer"
+requires-python = ">=3.12"
+dependencies = [
+    "mlx-whisper>=0.4",
+    "numpy>=1.26",
+    "pyserial>=3.5",
+    "scipy>=1.11",
+    "sounddevice>=0.4.6",
+    "soundfile>=0.12",
+]
+
+[project.scripts]
+claude-phone = "claude_phone.daemon:main"
+claude-phone-stt = "claude_phone.stt:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
